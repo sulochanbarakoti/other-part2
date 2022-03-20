@@ -2,11 +2,12 @@ import {useEffect, useState} from 'react'
 
 const App = (props) => {
 
-  const [persons, setPersons] = useState(props.notes)
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [showAll, setShowAll] = useState(true)
+  const [name, setName] = useState([])
 
-  console.log(persons.length)
+  // console.log(persons.length)
   const addNote = (event) => {
     // debugger
     event.preventDefault()
@@ -17,21 +18,34 @@ const App = (props) => {
       important: Math.random() < 0.5,
       id: persons.length + 1,
     }
-    // console.log(persons)
-    setPersons(persons.concat(nameObject))
-    // console.log(persons)
-    setNewName('')
 
+    persons.map(i=>{
+      setName(name.concat(i.name))
+    })
+    // console.log(name)
+    const isName = () =>{
+
+      // persons.map(i=>{
+      //   if (i.name === newName){
+      //     console.log("false")
+      //     return false
+      //   }
+      // })
+      // return true
+    }
+
+
+
+    if (isName()){
+      setPersons(persons.concat(nameObject))
+    }
+    
+    setNewName('')
   }
 
   const handleNoteChange = (event) => {
     setNewName(event.target.value)
   }
-
-  // const showPerson = () => {
-  //   const showTruePerson = persons.filter(item => item.important === true)
-  //   setShowAll(showTruePerson)
-  // }
 
   const nameToShow = showAll ? persons : persons.filter(item => item.important === true)
 
