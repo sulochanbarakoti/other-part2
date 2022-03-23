@@ -3,7 +3,6 @@
 const Display = (props) => {
 
     const data = props.props
-    console.log(props.props)
     return(
         <div>
             <h2>Numbers</h2>

@@ -1,18 +1,26 @@
-import { useState } from "react"
+import axios from "axios"
+import {useEffect, useState } from "react"
 import Display from "./display"
 
 const Form = () => {
 
-    const [persons, setPersons] = useState([
-        { name: 'Arto Hellas', number: '040-123456', id: 1 },
-        { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
-        { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
-        { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
-      ])
+    const [persons, setPersons] = useState([])
 
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
     const [search, setSearch] = useState('')
+
+    useEffect(()=>{
+        console.log('useeffect')
+        axios
+            .get('http://localhost:3001/notes')
+            .then(res=>{
+                console.log('promise fulfilled')
+                setPersons(res.data)
+                // console.log(res.data)
+                console.log(persons)
+            })
+    },[])
 
      // add button click event.
     const addNote = (event) => {
